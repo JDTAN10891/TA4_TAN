@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Guide</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { 
+            background: url('/Images/Bg.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .container { 
+            max-width: 850px;
+        }
+
+        .card {
+            position: relative;
+            height: 350px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: transform 0.3s ease-in-out;
+            background: rgba(0, 0, 0, 0.6); /* Transparent Gray */
+            color: white;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            height: 200px; 
+            width: auto; 
+            object-fit: contain; 
+            margin: auto; 
+            padding: 10px;
+        }
+
+        .card-body {
+            width: 100%;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+       
+        @keyframes cardClickEffect {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .card.clicked {
+            animation: cardClickEffect 0.3s ease-in-out;
+        }
+        .hover-description {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 0, 0.9);
+            color: black;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .menu-item:hover .hover-description {
+            transform: translateY(0);
+        }
+
+        h1 { 
+            font-size: 3.5rem; 
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: linear-gradient(45deg, #ffcc00, #ff6600, #ff0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+            animation: glowEffect 1.5s infinite alternate;
+        }
+        
+        /* Glow Animation */
+        @keyframes glowEffect {
+            0% { text-shadow: 3px 3px 5px rgba(255, 102, 0, 0.5); }
+            100% { text-shadow: 3px 3px 10px rgba(255, 102, 0, 0.8); }
+        }
+
+        .modal-content { text-align: left; display: flex; }
+        .modal-body { display: flex; align-items: center; padding: 20px; }
+        .modal-img { width: 50%; height: auto; border-radius: 10px; }
+        .modal-text { padding: 20px; width: 50%; font-size: 1.2rem; }
+        .modal-header { border-bottom: none; display: flex; align-items: center; }
+        .modal-logo { height: 60px; margin-right: 15px; }
+        .info-box {
+            background: yellow;
+            padding: 15px;
+            margin-bottom: 15px;
+            color: black;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            font-size: 1.2rem;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <h1>Restaurant Guide</h1>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card menu-item" data-bs-toggle="modal" data-bs-target="#menuModal" 
+                data-title="Gloria Mariz" 
+                data-description="Experience authentic Chinese cuisine at Gloria Maris with top-quality ingredients and seasoned chefs."
+                data-image="Images/gloria-maris-food.png"
+                data-logo="Images/Gloria Maris.png"
+                data-address="Gloria Maris Shark's Fin Restaurant Greenhills, Corner Missouri, San Juan, Metro Manila"
+                data-category="Chinese"
+                data-open="10:30AM - 10:30PM"
+                data-price="$$$">
+                    <img src="Images/Gloria Maris.png" class="card-img-top" alt="Gloria Maris">
+                    <div class="card-body">
+                        Gloria Maris
+                    </div>
+                    <div class="hover-description">Authentic Chinese cuisine 🍜</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card menu-item" data-bs-toggle="modal" data-bs-target="#menuModal" 
+                data-title="Zark's Burgers" 
+                data-description="A Filipino fast-casual burger chain known for its large, fresh, and affordable burgers."
+                data-image="Images/zark-s-burgers.png"
+                data-logo="Images/Zark Logo.png"
+                data-address="1/F Burgundy Transpacific Condominium, Taft Avenue, Manila"
+                data-category="Fast Food"
+                data-open="10AM - 9PM"
+                data-price="$$">
+                    <img src="Images/Zark.png" class="card-img-top" alt="Zark's Burger">
+                    <div class="card-body">
+                        Zark's Burgers
+                    </div>
+                    <div class="hover-description">Big, juicy burgers 🍔</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card menu-item" data-bs-toggle="modal" data-bs-target="#menuModal" 
+                data-title="Borro Manila" 
+                data-description="Borro Manila is a Quezon City restaurant known for its generous servings of comfort food."
+                data-image="Images/Borro-food.png"
+                data-logo="Images/Borro-Logo.png"
+                data-address="10 Scout Borromeo, cor Sct. Tobias St, Quezon City, Metro Manila"
+                data-category="Casual Dining"
+                data-open="7AM - 12AM"
+                data-price="$$$">
+                    <img src="Images/Borro.png" class="card-img-top" alt="Pasta">
+                    <div class="card-body">
+                        Borro
+                    </div>
+                    <div class="hover-description">Comfort food & cozy vibes 🍽️</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card menu-item" data-bs-toggle="modal" data-bs-target="#menuModal" 
+                data-title="Escolta at The Peninsula Manila" 
+                data-description="Very good ambiance, service, and wide selection of food. 
+                Highly recommend to calmly meet friends in a busy area.."
+                data-image="Images/Peninsula-food.png"
+                data-logo="Images/Peninsula-logo.png"
+                data-address="Corner Ayala and, 1226 Makati Ave, Makati, Metro Manila"
+                data-category="Buffet"
+                data-open="6AM - 10PM"
+                data-price="$$$">
+                    <img src="Images/Peninsula.png" class="card-img-top" alt="Peninsula Manila">
+                    <div class="card-body">
+                        Peninsula Manila
+                    </div>
+                    <div class="hover-description">all-you-can-eat-but-fine-dining 🥗</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="menuModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img id="menuLogo" class="modal-logo" src="" alt="Restaurant Logo">
+                    <h5 class="modal-title" id="menuTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="menuImage" class="modal-img" src="" alt="Menu Image">
+                    <div class="modal-text">
+                        <div class="info-box">
+                            <div>📍 <span id="menuAddress"></span></div>
+                            <div>🍽️ Category: <span id="menuCategory"></span></div>
+                            <div>⏰ Open: <span id="menuOpen"></span></div>
+                            <div>💰 Price: <span id="menuPrice"></span></div>
+                        </div>
+                        <p id="menuDescription"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.classList.add('clicked');
+        
+                setTimeout(() => {
+                    this.classList.remove('clicked');
+                }, 300);
+        
+                document.getElementById('menuTitle').innerText = this.getAttribute('data-title');
+                document.getElementById('menuDescription').innerText = this.getAttribute('data-description');
+                document.getElementById('menuImage').src = this.getAttribute('data-image');
+                document.getElementById('menuLogo').src = this.getAttribute('data-logo');
+                document.getElementById('menuAddress').innerText = this.getAttribute('data-address') || "N/A";
+                document.getElementById('menuCategory').innerText = this.getAttribute('data-category') || "N/A";
+                document.getElementById('menuOpen').innerText = this.getAttribute('data-open') || "N/A";
+                document.getElementById('menuPrice').innerText = this.getAttribute('data-price') || "N/A";
+            });
+        });
+    </script>
+</body>
+</html>
